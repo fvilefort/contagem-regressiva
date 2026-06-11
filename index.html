@@ -42,7 +42,7 @@
             letter-spacing: 2px;
         }
 
-        /* Estilo do CronÃ´metro */
+        /* Estilo do Cronômetro */
         .countdown {
             display: flex;
             justify-content: space-around;
@@ -69,7 +69,7 @@
             color: #ccc;
         }
 
-        /* Texto da HistÃ³ria DiÃ¡ria */
+        /* Texto da História Diária */
         .history-text {
             font-style: italic;
             font-size: 1rem;
@@ -78,7 +78,7 @@
             margin-top: 1rem;
         }
 
-        /* Tela Final (Escondida por padrÃ£o) */
+        /* Tela Final (Escondida por padrão) */
         #final-screen {
             display: none;
             position: fixed;
@@ -145,19 +145,19 @@
     </div>
 
     <script>
-        // ForÃ§ando o cÃ¡lculo correto com base na data atual + 1 mÃªs e 22 dias
+        // Forçando o cálculo correto com base na data atual + 1 mês e 22 dias
         const dataFinal = new Date();
-        dataFinal.setMonth(dataFinal.getMonth() + 1); // + 1 mÃªs
+        dataFinal.setMonth(dataFinal.getMonth() + 1); // + 1 mês
         dataFinal.setDate(dataFinal.getDate() + 22);  // + 22 dias
 
-        // Banco de dados de imagens de fundo e histÃ³rias
+        // Banco de dados de imagens de fundo e histórias
         const historicoDoTempo = [
-            { texto: "O comeÃ§o de uma longa e linda espera.", bg: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200" },
-            { texto: "O outono cai, as folhas mudam, mas a direÃ§Ã£o Ã© a mesma.", bg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200" },
-            { texto: "Metade do caminho. Olhando para trÃ¡s, cada dia valeu a pena.", bg: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200" },
-            { texto: "Os dias ficam mais curtos, a ansiedade sÃ³ aumenta.", bg: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1200" },
-            { texto: "Falta muito pouco. O tempo parece voar.", bg: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200" },
-            { texto: "Ã‰ amanhÃ£. O coraÃ§Ã£o bate mais forte na Ãºltima curva do caminho.", bg: "https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=1200" }
+            { texto: "O começo de uma longa e linda espera.", bg: "fundo0.jpg" },
+            { texto: "O outono cai, as folhas mudam, mas a direção é a mesma.", bg: "fundo2.jpg" },
+            { texto: "Metade do caminho. Olhando para trás, cada dia valeu a pena.", bg: "fundo3.jpg" },
+            { texto: "Os dias ficam mais curtos, a ansiedade só aumenta.", bg: "fundo4.jpg" },
+            { texto: "Falta muito pouco. O tempo parece voar.", bg: "fundo5.jpg" },
+            { texto: "É amanhã. O coração bate mais forte na última curva do caminho.", bg: "fundo6.jpg" }
         ];
 
         function atualizarContador() {
@@ -172,19 +172,19 @@
                 return;
             }
 
-            // CÃ¡lculos matemÃ¡ticos de tempo restante
+            // Cálculos matemáticos de tempo restante
             const diasR = Math.floor(diferenca / (1000 * 60 * 60 * 24));
             const horasR = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutosR = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
             const segundosR = Math.floor((diferenca % (1000 * 60)) / 1000);
 
-            // Atualiza os nÃºmeros na tela
+            // Atualiza os números na tela
             document.getElementById('days').innerText = String(diasR).padStart(2, '0');
             document.getElementById('hours').innerText = String(horasR).padStart(2, '0');
             document.getElementById('minutes').innerText = String(minutosR).padStart(2, '0');
             document.getElementById('seconds').innerText = String(segundosR).padStart(2, '0');
 
-            // Troca de fundos e textos conforme os dias diminuem (De 52 dias atÃ© 0)
+            // Troca de fundos e textos conforme os dias diminuem (De 52 dias até 0)
             let estagio = 0;
             if (diasR <= 1) estagio = 5;
             else if (diasR <= 7) estagio = 4;
@@ -193,7 +193,7 @@
             else if (diasR <= 42) estagio = 1;
             else estagio = 0;
 
-            // Define o plano de fundo e o texto dinÃ¢mico
+            // Define o plano de fundo e o texto dinâmico
             document.body.style.background = `url('${historicoDoTempo[estagio].bg}') no-repeat center center/cover`;
             document.getElementById('history').innerText = historicoDoTempo[estagio].texto;
         }
