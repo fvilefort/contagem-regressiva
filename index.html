@@ -42,7 +42,7 @@
             letter-spacing: 2px;
         }
 
-        /* Estilo do Cronômetro */
+        /* Estilo do CronÃ´metro */
         .countdown {
             display: flex;
             justify-content: space-around;
@@ -69,7 +69,7 @@
             color: #ccc;
         }
 
-        /* Texto da História Diária */
+        /* Texto da HistÃ³ria DiÃ¡ria */
         .history-text {
             font-style: italic;
             font-size: 1rem;
@@ -78,7 +78,7 @@
             margin-top: 1rem;
         }
 
-        /* Tela Final (Escondida por padrão) */
+        /* Tela Final (Escondida por padrÃ£o) */
         #final-screen {
             display: none;
             position: fixed;
@@ -145,19 +145,19 @@
     </div>
 
     <script>
-        // Forçando o cálculo correto com base na data atual + 1 mês e 22 dias
+        // ForÃ§ando o cÃ¡lculo correto com base na data atual + 1 mÃªs e 22 dias
         const dataFinal = new Date();
-        dataFinal.setMonth(dataFinal.getMonth() + 1); // + 1 mês
+        dataFinal.setMonth(dataFinal.getMonth() + 1); // + 1 mÃªs
         dataFinal.setDate(dataFinal.getDate() + 22);  // + 22 dias
 
-        // Banco de dados de imagens de fundo e histórias
+        // Banco de dados de imagens de fundo e histÃ³rias
         const historicoDoTempo = [
-            { texto: "O começo de uma longa e linda espera.", bg: "fundo0.jpg" },
-            { texto: "O outono cai, as folhas mudam, mas a direção é a mesma.", bg: "fundo2.jpg" },
-            { texto: "Metade do caminho. Olhando para trás, cada dia valeu a pena.", bg: "fundo3.jpg" },
-            { texto: "Os dias ficam mais curtos, a ansiedade só aumenta.", bg: "fundo4.jpg" },
+            { texto: "O comeÃ§o de uma longa e linda espera. Aguardando o futuro!", bg: "fundo0.jpg" },
+            { texto: "O outono cai, as folhas mudam, mas a direÃ§Ã£o Ã© a mesma.", bg: "fundo2.jpg" },
+            { texto: "Metade do caminho. Olhando para trÃ¡s, cada dia valeu a pena.", bg: "fundo3.jpg" },
+            { texto: "Os dias ficam mais curtos, a ansiedade sÃ³ aumenta.", bg: "fundo4.jpg" },
             { texto: "Falta muito pouco. O tempo parece voar.", bg: "fundo5.jpg" },
-            { texto: "É amanhã. O coração bate mais forte na última curva do caminho.", bg: "fundo6.jpg" }
+            { texto: "Ã‰ amanhÃ£. O coraÃ§Ã£o bate mais forte na Ãºltima curva do caminho.", bg: "fundo6.jpg" }
         ];
 
         function atualizarContador() {
@@ -172,19 +172,19 @@
                 return;
             }
 
-            // Cálculos matemáticos de tempo restante
+            // CÃ¡lculos matemÃ¡ticos de tempo restante
             const diasR = Math.floor(diferenca / (1000 * 60 * 60 * 24));
             const horasR = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutosR = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
             const segundosR = Math.floor((diferenca % (1000 * 60)) / 1000);
 
-            // Atualiza os números na tela
+            // Atualiza os nÃºmeros na tela
             document.getElementById('days').innerText = String(diasR).padStart(2, '0');
             document.getElementById('hours').innerText = String(horasR).padStart(2, '0');
             document.getElementById('minutes').innerText = String(minutosR).padStart(2, '0');
             document.getElementById('seconds').innerText = String(segundosR).padStart(2, '0');
 
-            // Troca de fundos e textos conforme os dias diminuem (De 52 dias até 0)
+            // Troca de fundos e textos conforme os dias diminuem (De 52 dias atÃ© 0)
             let estagio = 0;
             if (diasR <= 1) estagio = 5;
             else if (diasR <= 7) estagio = 4;
@@ -193,7 +193,7 @@
             else if (diasR <= 42) estagio = 1;
             else estagio = 0;
 
-            // Define o plano de fundo e o texto dinâmico
+            // Define o plano de fundo e o texto dinÃ¢mico
             document.body.style.background = `url('${historicoDoTempo[estagio].bg}') no-repeat center center/cover`;
             document.getElementById('history').innerText = historicoDoTempo[estagio].texto;
         }
