@@ -1,206 +1,400 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Jornada do Tempo</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #111;
-            color: #fff;
-            overflow: hidden;
-            transition: background 1s ease;
-        }
+<title>A Jornada do Tempo</title>
 
-        /* Container Principal */
-        .container {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.75);
-            border-radius: 16px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 90%;
-            width: 500px;
-            z-index: 10;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            letter-spacing: 2px;
-        }
+body{
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    overflow:hidden;
+    transition:all 1s ease;
 
-        /* Estilo do Cronômetro */
-        .countdown {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 1.5rem;
-        }
+    background:url('fundo7.jpg') no-repeat center center;
+    background-size:cover;
+}
 
-        .time-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            width: 22%;
-        }
+.container{
+    text-align:center;
+    padding:2rem;
+    width:550px;
+    max-width:90%;
 
-        .number {
-            font-size: 2rem;
-            font-weight: bold;
-            display: block;
-            color: #ff9f43;
-        }
+    background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(10px);
 
-        .label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            color: #ccc;
-        }
+    border-radius:20px;
 
-        /* Texto da História Diária */
-        .history-text {
-            font-style: italic;
-            font-size: 1rem;
-            color: #ddd;
-            min-height: 50px;
-            margin-top: 1rem;
-        }
+    border:1px solid rgba(255,255,255,.2);
 
-        /* Tela Final (Escondida por padrão) */
-        #final-screen {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 100;
-            animation: fadeIn 2s ease-in-out forwards;
-        }
+    z-index:10;
+}
 
-        #final-screen img {
-            max-width: 80%;
-            max-height: 70vh;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-        }
+h1{
+    font-size:1.8rem;
+    margin-bottom:30px;
+    letter-spacing:2px;
+}
 
-        #final-screen h2 {
-            margin-top: 1.5rem;
-            font-size: 2.5rem;
-            color: #fff;
-            letter-spacing: 3px;
-        }
+.countdown{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
+.time-box{
+    flex:1;
+
+    padding:15px;
+
+    background:rgba(255,255,255,.1);
+
+    border-radius:10px;
+}
+
+.number{
+    display:block;
+    font-size:2rem;
+    font-weight:bold;
+    color:#ff9f43;
+}
+
+.label{
+    color:#ccc;
+    font-size:.8rem;
+    text-transform:uppercase;
+}
+
+.history-text{
+    margin-top:30px;
+    min-height:50px;
+
+    color:#ddd;
+
+    font-style:italic;
+}
+
+#final-screen{
+    display:none;
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:black;
+
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    animation:fadeIn 2s forwards;
+}
+
+#final-screen img{
+    max-width:80%;
+    max-height:70vh;
+
+    border-radius:15px;
+
+    box-shadow:0 0 30px rgba(255,255,255,.4);
+}
+
+#final-screen h2{
+    margin-top:20px;
+    font-size:2.5rem;
+    letter-spacing:3px;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+@media(max-width:600px){
+
+.countdown{
+    flex-wrap:wrap;
+}
+
+.time-box{
+    width:45%;
+}
+
+}
+</style>
+
 </head>
+
 <body>
 
-    <div class="container" id="countdown-container">
-        <h1 id="title">É hora de descansar e continuar minha Hist&oacute;ria em outro lugar.</h1>
-        <div class="countdown">
-            <div class="time-box">
-                <span class="number" id="days">00</span>
-                <span class="label">Dias</span>
-            </div>
-            <div class="time-box">
-                <span class="number" id="hours">00</span>
-                <span class="label">Horas</span>
-            </div>
-            <div class="time-box">
-                <span class="number" id="minutes">00</span>
-                <span class="label">Min</span>
-            </div>
-            <div class="time-box">
-                <span class="number" id="seconds">00</span>
-                <span class="label">Seg</span>
-            </div>
-        </div>
-        <div class="history-text" id="history">Carregando mem&oacute;rias do Vilefort...</div>
-    </div>
+<div class="container" id="countdown-container">
 
-    <div id="final-screen">
-        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000" alt="Imagem Final">
-        <h2>O FINAL CHEGOU! ??</h2>
-    </div>
+<h1>
+É hora de descansar e continuar minha História em outro lugar
+</h1>
 
-    <script>
-        // Forçando o cálculo correto com base na data atual + 1 mês e 22 dias
-        const dataFinal = new Date();
-        dataFinal.setMonth(dataFinal.getMonth() + 1); // + 1 mês
-        dataFinal.setDate(dataFinal.getDate() + 22);  // + 22 dias
+<div class="countdown">
 
-        // Banco de dados de imagens de fundo e histórias
-        const historicoDoTempo = [
-            { texto: "O começo e Aguardando o futuro!", bg: "fundo7.jpg" },
-            { texto: "O outono cai, as folhas mudam, mas a direção é a mesma.", bg: "fundo0.jpg" },
-            { texto: "Metade do caminho. Olhando para trás, cada dia valeu a pena.", bg: "fundo3.jpg" },
-            { texto: "Os dias ficam mais curtos, a ansiedade só aumenta.", bg: "fundo4.jpg" },
-            { texto: "Falta muito pouco. O tempo parece voar.", bg: "fundo5.jpg" },
-            { texto: "É amanhã. O coração bate mais forte na última curva do caminho.", bg: "fundo6.jpg" }
-        ];
+<div class="time-box">
+<span class="number" id="days">00</span>
+<span class="label">Dias</span>
+</div>
 
-        function atualizarContador() {
-            const agora = new Date().getTime();
-            const diferenca = dataFinal.getTime() - agora;
+<div class="time-box">
+<span class="number" id="hours">00</span>
+<span class="label">Horas</span>
+</div>
 
-            if (diferenca <= 0) {
-                clearInterval(intervalo);
-                document.getElementById('countdown-container').style.display = 'none';
-                document.getElementById('final-screen').style.display = 'flex';
-                document.body.style.background = "#000";
-                return;
-            }
+<div class="time-box">
+<span class="number" id="minutes">00</span>
+<span class="label">Min</span>
+</div>
 
-            // Cálculos matemáticos de tempo restante
-            const diasR = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            const horasR = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutosR = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-            const segundosR = Math.floor((diferenca % (1000 * 60)) / 1000);
+<div class="time-box">
+<span class="number" id="seconds">00</span>
+<span class="label">Seg</span>
+</div>
 
-            // Atualiza os números na tela
-            document.getElementById('days').innerText = String(diasR).padStart(2, '0');
-            document.getElementById('hours').innerText = String(horasR).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(minutosR).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(segundosR).padStart(2, '0');
+</div>
 
-            // Troca de fundos e textos conforme os dias diminuem (De 52 dias até 0)
-            let estagio = 0;
-            if (diasR <= 1) estagio = 5;
-            else if (diasR <= 7) estagio = 4;
-            else if (diasR <= 15) estagio = 3;
-            else if (diasR <= 26) estagio = 2;
-            else if (diasR <= 42) estagio = 1;
-            else estagio = 0;
+<div class="history-text" id="history">
+Carregando memórias do Vilefort...
+</div>
 
-            // Define o plano de fundo e o texto dinâmico
-            document.body.style.background = `url('${historicoDoTempo[estagio].bg}') no-repeat center center/cover`;
-            document.getElementById('history').innerText = historicoDoTempo[estagio].texto;
-        }
+</div>
 
-        // Executa o script
-        const intervalo = setInterval(atualizarContador, 1000);
-        atualizarContador();
-    </script>
+<div id="final-screen">
+
+<img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000">
+
+<h2>O FINAL CHEGOU! 🎉</h2>
+
+</div>
+
+<script>
+
+/*
+Agosto = mês 7
+(JavaScript começa em 0)
+*/
+
+const dataFinal = new Date(
+    2026,
+    7,
+    2,
+    0,
+    0,
+    0
+);
+
+
+const historicoDoTempo=[
+
+{
+texto:"O começo. Aguardando o futuro!",
+bg:"fundo7.jpg"
+},
+
+{
+texto:"O outono cai, as folhas mudam, mas a direção permanece.",
+bg:"fundo0.jpg"
+},
+
+{
+texto:"Metade do caminho. Cada dia valeu a pena.",
+bg:"fundo3.jpg"
+},
+
+{
+texto:"Os dias ficam menores. A expectativa aumenta.",
+bg:"fundo4.jpg"
+},
+
+{
+texto:"Falta pouco. O tempo parece acelerar.",
+bg:"fundo5.jpg"
+},
+
+{
+texto:"É amanhã. O coração bate mais forte.",
+bg:"fundo6.jpg"
+}
+
+];
+
+
+function atualizarContador(){
+
+let agora=new Date().getTime();
+
+let diferenca=dataFinal.getTime()-agora;
+
+
+if(diferenca<=0){
+
+clearInterval(intervalo);
+
+document.getElementById(
+'countdown-container'
+).style.display='none';
+
+document.getElementById(
+'final-screen'
+).style.display='flex';
+
+document.body.style.background="#000";
+
+return;
+
+}
+
+
+let dias=Math.floor(
+diferenca/(1000*60*60*24)
+);
+
+
+let horas=Math.floor(
+(diferenca%(1000*60*60*24))
+/
+(1000*60*60)
+);
+
+
+let minutos=Math.floor(
+(diferenca%(1000*60*60))
+/
+(1000*60)
+);
+
+
+let segundos=Math.floor(
+(diferenca%(1000*60))
+/
+1000
+);
+
+
+document.getElementById(
+'days'
+).innerText=String(
+dias
+).padStart(
+2,
+'0'
+);
+
+
+document.getElementById(
+'hours'
+).innerText=String(
+horas
+).padStart(
+2,
+'0'
+);
+
+
+document.getElementById(
+'minutes'
+).innerText=String(
+minutos
+).padStart(
+2,
+'0'
+);
+
+
+document.getElementById(
+'seconds'
+).innerText=String(
+segundos
+).padStart(
+2,
+'0'
+);
+
+
+let estagio=0;
+
+
+if(dias<=1){
+
+estagio=5;
+
+}
+else if(dias<=7){
+
+estagio=4;
+
+}
+else if(dias<=15){
+
+estagio=3;
+
+}
+else if(dias<=26){
+
+estagio=2;
+
+}
+else if(dias<=42){
+
+estagio=1;
+
+}
+
+
+document.body.style.background=
+`url('${historicoDoTempo[estagio].bg}')
+no-repeat center center fixed`;
+
+
+document.body.style.backgroundSize=
+"cover";
+
+
+document.getElementById(
+'history'
+).innerText=
+historicoDoTempo[
+estagio
+].texto;
+
+}
+
+
+const intervalo=
+setInterval(
+atualizarContador,
+1000
+);
+
+
+atualizarContador();
+
+</script>
+
 </body>
 </html>
